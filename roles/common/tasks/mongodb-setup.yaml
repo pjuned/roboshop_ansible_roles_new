@@ -10,11 +10,11 @@
 
 - name: get the catalogue entries count
   ansible.builtin.shell: mongosh --host mongodb.aws76s.online -quiet --eval 'db=db.getSiblingDB("catalogue"); db.products.estimatedDocumentCount()'
-  register: products_count
+  register: catalogue_count
   when: component == "catalogue"
 
 - name: get the user entries count
-  ansible.builtin.command: mongosh --host mongodb.aws76s.online -quiet --eval 'db=db.getSiblingDB("user"); db.products.estimatedDocumentCount()'
+  ansible.builtin.shell: mongosh --host mongodb.aws76s.online -quiet --eval 'db=db.getSiblingDB("user"); db.products.estimatedDocumentCount()'
   register: users_count
   when: component == "user"
 
@@ -30,9 +30,9 @@
 
 - name: load {{component}} data
   ansible.builtin.shell: mongosh --host mongodb.aws76s.online < /app/schema/{{component}}.js
-  when: product_count.stdout == "0" and component == "catalogue"
+  when: component == "catalogue" and catalogue_count.stdout == "0"
 
-  - name: load {{component}} data
+- name: load {{component}} data
   ansible.builtin.shell: mongosh --host mongodb.aws76s.online < /app/schema/{{component}}.js
-  when: users_count.stdout == "0" and component == "user"
-  ignore_errors: true
+  when: component == "users "users_count.stdout == "0"
+  #ignore_errors: true
