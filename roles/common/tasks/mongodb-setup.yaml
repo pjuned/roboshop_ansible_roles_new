@@ -15,7 +15,7 @@
 
 - name: get the user entries count
   ansible.builtin.shell: mongosh --host mongodb.aws76s.online -quiet --eval 'db=db.getSiblingDB("user"); db.products.estimatedDocumentCount()'
-  register: users_count
+  register: user_count
   when: component == "user"
 
 # - name: Get categories count
@@ -35,5 +35,5 @@
 
 - name: load user data into mongodb
   ansible.builtin.shell: mongosh --host mongodb.aws76s.online < /app/schema/{{component}}.js
-  when: component == "user" users_count.stdout == "0"
+  when: component == "user" user_count.stdout == "0"
   ignore_errors: true
