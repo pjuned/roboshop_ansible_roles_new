@@ -1,0 +1,14 @@
+ tasks:
+    - name: install 3.6, gcc, python3-devel packages
+      ansible.builtin.dnf:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - python3.11
+        - gcc
+        - python3-devel
+
+    - name: install  dependencies
+      ansible.builtin.command: pip3.11 install -r requirements.txt
+      args:
+        chdir: /app
