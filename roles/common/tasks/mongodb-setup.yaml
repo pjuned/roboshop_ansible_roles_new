@@ -28,11 +28,12 @@
 #   ansible.builtin.debug:
 #     msg: "product count: {{product_count}}"
 
-- name: load {{component}} data
+- name: load catalogue data into mongodb
   ansible.builtin.shell: mongosh --host mongodb.aws76s.online < /app/schema/{{component}}.js
   when: component == "catalogue" and catalogue_count.stdout == "0"
+  ignore_errors: true
 
-- name: load {{component}} data
+- name: load user data into mongodb
   ansible.builtin.shell: mongosh --host mongodb.aws76s.online < /app/schema/{{component}}.js
   when: component == "user" users_count.stdout == "0"
-  #ignore_errors: true
+  ignore_errors: true
