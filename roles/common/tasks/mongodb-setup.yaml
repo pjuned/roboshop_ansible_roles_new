@@ -34,5 +34,5 @@
 
 - name: load {{component}} data
   ansible.builtin.shell: mongosh --host mongodb.aws76s.online < /app/schema/{{component}}.js
-  when: component == "users "users_count.stdout == "0"
+  when: component == "user" users_count.stdout == "0"
   #ignore_errors: true
