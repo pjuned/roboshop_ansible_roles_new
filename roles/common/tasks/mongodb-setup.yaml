@@ -1,0 +1,38 @@
+- name: copy mongodb repo
+  ansible.builtin.copy:
+    src: mongodb.repo
+    dest: /etc/yum.repos.d/mongodb.repo
+    
+- name: install mongodb client
+  ansible.builtin.package:
+    name: mongodb-mongosh
+    state: present
+
+- name: get the catalogue entries count
+  ansible.builtin.shell: mongosh --host mongodb.aws76s.online -quiet --eval 'db=db.getSiblingDB("catalogue"); db.products.estimatedDocumentCount()'
+  register: products_count
+  when: component == "catalogue"
+
+- name: get the user entries count
+  ansible.builtin.command: mongosh --host mongodb.aws76s.online -quiet --eval 'db=db.getSiblingDB("user"); db.products.estimatedDocumentCount()'
+  register: users_count
+  when: component == "user"
+
+# - name: Get categories count
+#   community.mongodb.mongodb_shell:
+#     login_host: mongodb.aws76s.online
+#     db: catalogue
+#     eval: "db.products.count()"
+
+# - name: print the count
+#   ansible.builtin.debug:
+#     msg: "product count: {{product_count}}"
+
+- name: load {{component}} data
+  ansible.builtin.shell: mongosh --host mongodb.aws76s.online < /app/schema/{{component}}.js
+  when: product_count.stdout == "0" and component == "catalogue"
+
+  - name: load {{component}} data
+  ansible.builtin.shell: mongosh --host mongodb.aws76s.online < /app/schema/{{component}}.js
+  when: users_count.stdout == "0" and component == "user"
+  ignore_errors: true
