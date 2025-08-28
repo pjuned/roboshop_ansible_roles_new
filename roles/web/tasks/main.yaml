@@ -29,9 +29,21 @@
 #     src: roboshop.conf 
 #     dest: /etc/nginx/default.d/roboshop.conf 
     
-- name: Copying roboshop.conf file 
-  ansible.builtin.copy: 
+# - name: Copying roboshop.conf file 
+#   ansible.builtin.copy: 
+#     src: roboshop.conf
+#     dest: /etc/nginx/default.d/roboshop.conf 
+#   notify: # Handler
+#   - restart nginx 
+
+- name: remove default nginx conf
+  ansible.builtin.file:
+    path: /etc/nginx/nginx.conf
+    state: absent
+
+- name: copy roboshop nginx conf
+  ansible.builtin.copy:
     src: roboshop.conf
-    dest: /etc/nginx/default.d/roboshop.conf 
-  notify: # Handler
-  - restart nginx 
+    dest: /etc/nginx/nginx.conf
+  notify:
+    - Restart nginx
