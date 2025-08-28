@@ -34,4 +34,4 @@
     src: roboshop.conf
     dest: /etc/nginx/default.d/roboshop.conf 
   notify: # Handler
-    - restart nginx 
+  - restart nginx 
