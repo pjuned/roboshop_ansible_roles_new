@@ -8,10 +8,10 @@
     name: common
     tasks_from: java
 
-- name: mysql-setup 
+- name: mysql_setup 
   ansible.builtin.import_role:
     name: common
-    tasks_from: mysql-setup
+    tasks_from: mysql_setup
 
 - name: systemd 
   ansible.builtin.import_role:
