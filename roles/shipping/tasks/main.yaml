@@ -11,7 +11,7 @@
 - name: mysql-setup 
   ansible.builtin.import_role:
     name: common
-    tasks_from: mongodb-setup
+    tasks_from: mysql-setup
 
 - name: systemd 
   ansible.builtin.import_role:
