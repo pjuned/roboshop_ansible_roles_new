@@ -46,4 +46,4 @@
     src: roboshop.conf
     dest: /etc/nginx/nginx.conf
   notify:
-    - Restart nginx
+  - Restart nginx
