@@ -2,9 +2,9 @@
   ansible.builtin.dnf:
     name: "{{ item }}"
     state: installed  
-    loop:
-    - maven
-    - mysql
+  loop:
+  - maven
+  - mysql
 
 - name: install dependencies
   ansible.builtin.command: mvn clean package
