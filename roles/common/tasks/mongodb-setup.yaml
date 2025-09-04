@@ -31,9 +31,9 @@
 - name: load catalogue data into mongodb
   ansible.builtin.shell: mongosh --host {{MONGODB_HOST}} < /app/schema/{{component}}.js
   when: component == "catalogue" and catalogue_count.stdout == "0"
-  ignore_errors: true
+  #ignore_errors: true
 
 - name: load user data into mongodb
   ansible.builtin.shell: mongosh --host {{MONGODB_HOST}} < /app/schema/{{component}}.js
   when: component == "user" and user_count.stdout == "0"
-  ignore_errors: true
+  #ignore_errors: true
