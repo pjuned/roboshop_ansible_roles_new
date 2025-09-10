@@ -14,16 +14,16 @@
 
 - name: Load schema(cities) data
   ansible.builtin.shell:
-    mysql -h {{MYSQL_HOST}} -uroot -p{{mysql_pwd}} < /app/db/schema.sql
+    mysql -h mysql.aws76s.online -uroot -p{{mysql_pwd}} < /app/db/schema.sql
   when: cities_schema.stdout == "0"
   
 
 - name: Load app-user data
   ansible.builtin.shell:
-    mysql -h {{MYSQL_HOST}} -uroot -p{{mysql_pwd}} < /app/db/app-user.sql
+    mysql -h mysql.aws76s.online -uroot -p{{mysql_pwd}} < /app/db/app-user.sql
   when: cities_schema.stdout == "0"
 
 - name: Load master-data
   ansible.builtin.shell:
-    mysql -h {{MYSQL_HOST}} -uroot -p{{mysql_pwd}} < /app/db/master-data.sql
+    mysql -h mysq.aws76s.online -uroot -p{{mysql_pwd}} < /app/db/master-data.sql
   when: cities_schema.stdout == "0"
