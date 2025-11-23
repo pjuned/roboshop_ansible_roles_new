@@ -1,0 +1,12 @@
+MONGODB_HOST: mongodb-prod.aws76s.online
+REDIS_HOST: redis-prod.aws76s.online
+CATALOGUE_HOST: catalogue-prod.aws76s.online
+USER_HOST: user-prod.aws76s.online
+CART_HOST: cart-prod.aws76s.online
+SHIPPING_HOST: shipping-prod.aws76s.online
+PAYMENT_HOST: payment-prod.aws76s.online
+DISPATCH_HOST: dispatch-prod.aws76s.online
+WEB_HOST: web-prod.aws76s.online
+MYSQL_HOST: mysql-prod.aws76s.online
+RABBITMQ_HOST: rabbitmq-prod.aws76s.online
+
