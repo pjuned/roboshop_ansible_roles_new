@@ -25,5 +25,5 @@
 
 - name: Load master-data
   ansible.builtin.shell:
-    mysql -h mysq.aws76s.online -uroot -p{{mysql_pwd}} < /app/db/master-data.sql
+    mysql -h mysql.aws76s.online -uroot -p{{mysql_pwd}} < /app/db/master-data.sql
   when: cities_schema.stdout == "0"
